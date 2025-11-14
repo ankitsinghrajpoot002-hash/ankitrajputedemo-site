@@ -1,52 +1,716 @@
 <!DOCTYPE html>
-<html lang="en">
-    
+<html lang="en" data-color-scheme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <title>Portfolio Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ankit Rajput | Portfolio</title>
+  <meta name="description" content="Portfolio website of Ankit Rajput, Class 12th Student and Web Developer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000000;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+    ::selection { background: #b74b4b; color: #fff; }
+    
+    /* Header */
+    header {
+      position: fixed;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      padding: 1rem 9%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      filter: drop-shadow(0 4px 8px rgba(183, 75, 75, 0.15));
+    }
+    .logo {
+      font-size: 3rem;
+      color: #b74b4b;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.5s ease;
+    }
+    .logo:hover { transform: scale(1.1); }
+    nav a, .nav-btn {
+      font-size: 1.8rem;
+      color: #ffffff;
+      margin-left: 3rem;
+      font-weight: 500;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      transition: 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+    nav a:hover, nav a.active, .nav-btn:hover {
+      color: #b74b4b;
+      border-bottom: 3px solid #b74b4b;
+    }
+    #menu-icon { font-size: 3.6rem; color: #b74b4b; display: none; }
+    
+    /* Sections */
+    section {
+      min-height: 100vh;
+      padding: 5rem 9% 5rem;
+    }
+    .home {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8rem;
+    }
+    .home-content h3 {
+      font-size: 4rem;
+      font-weight: 700;
+    }
+    .home-content h1 {
+      font-size: 6rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .home-content h1 span { color: #b74b4b; }
+    #typewriter {
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: #b74b4b;
+      min-height: 4rem;
+    }
+    .home-content p {
+      font-size: 1.6rem;
+      margin: 2rem 0;
+    }
+    .social-media {
+      display: flex;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .social-media a {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 4rem;
+      height: 4rem;
+      background: transparent;
+      border: 3px solid #b74b4b;
+      border-radius: 50%;
+      font-size: 2rem;
+      color: #b74b4b;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+    .social-media a:hover {
+      background: #b74b4b;
+      color: #000;
+      transform: scale(1.3);
+      box-shadow: 0 0 25px #b74b4b;
+    }
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.8rem;
+      background: #000;
+      border-radius: 4rem;
+      font-size: 1.6rem;
+      color: #b74b4b;
+      letter-spacing: 0.3rem;
+      font-weight: 600;
+      border: 2px solid #b74b4b;
+      transition: 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background: #b74b4b;
+      color: #000;
+      box-shadow: 0 0 25px #b74b4b;
+    }
+    .home-img img {
+      width: 32vw;
+      border-radius: 50%;
+      box-shadow: 0 0 25px #b74b4b;
+      cursor: pointer;
+      transition: 0.2s linear;
+    }
+    .home-img img:hover { box-shadow: 0 0 35px #b74b4b; }
+    
+    /* Info Section */
+    .info-card {
+      background: rgba(183, 75, 75, 0.05);
+      border-left: 4px solid #b74b4b;
+      padding: 3rem;
+      margin: 2rem 0;
+      border-radius: 1rem;
+    }
+    .info-card pre {
+      font-family: 'Courier New', monospace;
+      font-size: 1.6rem;
+      line-height: 2.4;
+      color: #ffffff;
+      white-space: pre-wrap;
+    }
+    .info-quote {
+      text-align: center;
+      font-size: 2rem;
+      color: #b74b4b;
+      margin-top: 3rem;
+      font-weight: 600;
+    }
+    
+    /* Army Section */
+    .army-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .army-header h2 {
+      font-size: 4.5rem;
+      color: #b74b4b;
+      margin-bottom: 1rem;
+    }
+    .army-header p {
+      font-size: 1.8rem;
+      color: #ccc;
+    }
+    .army-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .fact-box {
+      background: rgba(183, 75, 75, 0.1);
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      border: 2px solid #b74b4b;
+      transition: 0.3s ease;
+    }
+    .fact-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(183, 75, 75, 0.3);
+    }
+    .fact-box h3 {
+      font-size: 2rem;
+      color: #b74b4b;
+    }
+    .army-articles, .blog-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+    .article-card, .blog-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 2px solid rgba(183, 75, 75, 0.3);
+      border-radius: 1rem;
+      padding: 2rem;
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+    .article-card:hover, .blog-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(183, 75, 75, 0.4);
+      border-color: #b74b4b;
+    }
+    .article-card h3, .blog-card h3 {
+      font-size: 2rem;
+      color: #b74b4b;
+      margin-bottom: 1rem;
+    }
+    .article-meta, .blog-meta {
+      font-size: 1.3rem;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+    .article-meta span, .blog-meta span {
+      color: #b74b4b;
+      font-weight: 600;
+    }
+    .article-card p, .blog-card p {
+      font-size: 1.5rem;
+      color: #ccc;
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Contact */
+    .contact {
+      text-align: center;
+    }
+    .contact h2 {
+      font-size: 4rem;
+      color: #b74b4b;
+      margin-bottom: 3rem;
+    }
+    .contact p {
+      font-size: 1.8rem;
+      margin: 1rem 0;
+    }
+    .contact a {
+      color: #b74b4b;
+      text-decoration: none;
+    }
+    .contact a:hover { text-decoration: underline; }
+    
+    /* Footer */
+    footer {
+      background: #000;
+      padding: 2rem 9%;
+      text-align: center;
+      border-top: 2px solid #b74b4b;
+    }
+    .footer-quote {
+      font-size: 1.8rem;
+      color: #b74b4b;
+      margin-bottom: 1rem;
+    }
+    .visitor-count {
+      font-size: 1.6rem;
+      color: #fff;
+      margin: 1rem 0;
+    }
+    .copyright {
+      font-size: 1.4rem;
+      color: #888;
+    }
+    
+    /* Password Modal */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-content {
+      background: #111;
+      padding: 4rem;
+      border-radius: 1rem;
+      border: 3px solid #b74b4b;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(183, 75, 75, 0.5);
+    }
+    .modal-content h2 {
+      font-size: 3rem;
+      color: #b74b4b;
+      margin-bottom: 2rem;
+    }
+    .modal-content input {
+      width: 100%;
+      padding: 1.5rem;
+      font-size: 1.8rem;
+      background: #222;
+      border: 2px solid #b74b4b;
+      border-radius: 0.5rem;
+      color: #fff;
+      margin-bottom: 2rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    .error-msg {
+      color: #ff4444;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      animation: shake 0.3s;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+    
+    /* Responsive */
+    @media (max-width: 995px) {
+      header { padding: 1rem 5%; }
+      section { padding: 4rem 5%; }
+      .home {
+        flex-direction: column;
+        gap: 4rem;
+      }
+      .home-content h3 { font-size: 3rem; }
+      .home-content h1 { font-size: 4.5rem; }
+      #typewriter { font-size: 2.5rem; }
+      .home-img img { width: 70vw; }
+      nav a, .nav-btn { font-size: 1.5rem; margin-left: 2rem; }
+    }
+    @media (max-width: 768px) {
+      .army-articles, .blog-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <a href="#" class="logo">Ankit Rajput</a>
-
-        <nav>
-            <a href="#" class="active"> Home</a>
-            <a href="#">Services</a>
-            <a href="#">Skills</a>
-            <a href="#">Education</a>
-            <a href="#">Experience</a>
-            <a href="#">Contact</a>
-        </nav>
-    </header>
-
-    <section class="home">
-        <div class="home-img">
-            <img src="main.jpg" alt="">
+  <!-- Password Modal -->
+  <div id="passwordModal" class="modal" style="display:flex;">
+    <div class="modal-content">
+      <h2>🔒 Portfolio Access</h2>
+      <input id="passwordInput" type="password" placeholder="Enter Password" maxlength="4">
+      <div id="errorMessage" class="error-msg" style="display:none;">Invalid Password</div>
+      <button class="btn" id="loginBtn">Enter</button>
+    </div>
+  </div>
+  <!-- Main Portfolio Content -->
+  <header id="mainHeader" style="display:none;">
+    <div class="navbar">
+      <span class="logo">AR</span>
+      <nav>
+        <a href="#home" class="active">Home</a>
+        <a href="#army">Army &amp; War</a>
+        <a href="#blog">Blog</a>
+        <a href="#info">Info</a>
+        <a href="#contact">Contact</a>
+        <button class="nav-btn" id="logoutBtn">Logout</button>
+      </nav>
+    </div>
+  </header>
+  <div id="mainContent" style="display:none;">
+    <!-- Home Section -->
+    <section class="home" id="home">
+      <div class="home-content">
+        <h3>Welcome to my portfolio</h3>
+        <h1>Ankit <span>Rajput</span></h1>
+        <div id="typewriter">Web Developer</div>
+        <p>A passionate web developer and student exploring technology, coding, and the rich history of Indian military excellence. Building web experiences while preparing for competitive exams.</p>
+        <div class="social-media">
+          <a href="https://t.me/itzAnkitRajput" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="https://github.com/ankitsinghrajpoot002-hash" target="_blank"><i class="fab fa-github"></i></a>
         </div>
-
-        <div class="home-content">
-            <h1>Hi, It's <span>Ankit Rajput</span></h1>
-            <h3 class="typing-text">I'm a <span>Student</span></h3>
-
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Minus labore dolores esse. Odit similique doloribus tenetur 
-                doloremque, sunt commodi in ipsa repudiandae debitis deleniti 
-                blanditiis quibusdam quaerat neque asperiores ea.
-            </p>
-
-            <div class="social-icons">
-                <a href="https://t.me/itzAnkitRajput" target="_blank">
-                    <i class="fa-brands fa-telegram"></i>
-                </a>
-                <a href="https://github.com/ankitsinghrajpoot002-hash" target="_blank">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-            </div>
-        </div>
+        <a href="#army" class="btn">Explore</a>
+      </div>
+      <div class="home-img">
+        <img src="https://r2cdn.perplexity.ai/portfolio/placeholder-profile-dark.png" alt="Ankit Rajput">
+      </div>
     </section>
+
+    <!-- Info Section -->
+    <section class="info" id="info">
+      <h2 style="font-size: 4rem; color: #b74b4b; text-align: center; margin-bottom: 3rem;">Personal Info</h2>
+      <div class="info-card">
+        <pre>★ 𝙉𝙖𝙢𝙚   : 𝓐𝓷𝓴𝓲𝓽 𝓡𝓪𝓳𝓹𝓾𝓣
+★ 𝘼𝙜𝙚   : 19
+★ 𝘾𝙞𝙩𝙮   : 𝓒𝓱𝓱𝓪𝓹𝓻𝓪
+★ 𝘾𝙖𝙨𝙩𝙚  : 𝓑𝓐𝓑𝓤𝓐𝓐𝓝
+★ 𝙁𝙖𝙫 𝙋𝙡𝙖𝙮𝙚𝙧 : 𝓥𝓪𝓲𝓫𝓱𝓪𝓥 𝓢𝓾𝓻𝔂𝓪𝓥𝓪𝓷𝓼𝓱𝓲
+★ 𝙁𝙖𝙫 𝙉𝙤.  : 𝟬𝟳
+★ 𝘼𝙙𝙙𝙞𝙘𝙩𝙚𝙙 𝙏𝙤 : 🏏 𝓒𝓻𝓲𝓬𝓴𝓮𝓽
+★ 𝙐𝙨𝙚𝙧𝙣𝙖𝙢𝙚 : @ANKlTSlNGH</pre>
+      </div>
+      <div class="info-quote">🕯️ "असुरोऽहम् नास्तिकोऽहम् — न मस्तक झुकता, न नियम रचता।"</div>
+    </section>
+
+    <!-- Army & War Section -->
+    <section class="army" id="army">
+      <div class="army-header">
+        <h2>Indian Army: Pride of Nation</h2>
+        <p>The largest volunteer standing army | Story of valor, sacrifice, and excellence</p>
+      </div>
+      <div class="army-facts">
+        <div class="fact-box"><h3>1.2M+ Active Personnel</h3></div>
+        <div class="fact-box"><h3>Largest Volunteer Army</h3></div>
+        <div class="fact-box"><h3>Kargil War Victory</h3></div>
+        <div class="fact-box"><h3>Ever Ready to Serve</h3></div>
+      </div>
+      <div class="army-articles" id="armyArticles"></div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+      <h2 style="font-size: 4rem; color: #b74b4b; text-align: center; margin-bottom: 2rem;">Blog &amp; Articles</h2>
+      <div class="blog-cards" id="blogCards"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <h2>Get in Touch</h2>
+      <p><strong>Telegram:</strong> <a href="https://t.me/itzAnkitRajput" target="_blank">https://t.me/itzAnkitRajput</a></p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/ankitsinghrajpoot002-hash" target="_blank">github.com/ankitsinghrajpoot002-hash</a></p>
+      <p><strong>City:</strong> Chhapra, Bihar</p>
+      <p style="margin-top: 2rem; font-size: 1.6rem;">Feel free to reach out for collaboration or any queries!</p>
+      <div class="social-media" style="justify-content: center; margin-top: 2rem;">
+        <a href="https://t.me/itzAnkitRajput" target="_blank"><i class="fab fa-telegram"></i></a>
+        <a href="https://github.com/ankitsinghrajpoot002-hash" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-quote">"असुरोऽहम् नास्तिकोऽहम् — न मस्तक झुकता, न नियम रचता।"</div>
+      <div class="visitor-count" id="visitCounter">Visitors: 247</div>
+      <div class="copyright">© 2025 Ankit Rajput. All rights reserved.</div>
+    </footer>
+  </div>
+<script>
+// Portfolio Data
+const PORTFOLIO = {
+  password: '0000',
+  visitCounter: 247,
+  armyArticles: [
+    {
+      title: "Kargil War: Tales of Bravery",
+      date: "1999",
+      category: "History",
+      excerpt: "The epic Kargil conflict showcased the courage and determination of Indian soldiers. A testament to their unwavering spirit and sacrifice.",
+      content: "The Kargil War (1999) remains one of the most significant military operations in independent India's history. Against daunting odds and harsh terrain, Indian soldiers displayed extraordinary bravery."
+    },
+    {
+      title: "Indian Army: Inspiration to the World",
+      date: "2024",
+      category: "Military",
+      excerpt: "Recognized globally for its professionalism, discipline, and commitment to peace and security, the Indian Army continues to inspire millions.",
+      content: "The Indian Army stands as a beacon of hope, serving not just the nation but contributing to peacekeeping missions worldwide."
+    },
+    {
+      title: "Brave Stories of Soldiers",
+      date: "2024",
+      category: "Heroes",
+      excerpt: "Every soldier carries stories of valor, sacrifice, and dedication. A tribute to those who gave everything for the nation.",
+      content: "Behind every military success are stories of individual heroism, sacrifice, and unwavering commitment to duty."
+    },
+    {
+      title: "Life in Indian Army",
+      date: "2024",
+      category: "Career",
+      excerpt: "Discover the challenges, opportunities, and rewards of serving in the Indian Armed Forces. A career of honor and excellence.",
+      content: "Military life demands discipline, courage, and a commitment to excellence. It shapes individuals and builds national strength."
+    }
+  ],
+  blogs: [
+    {
+      title: "Getting Started with Web Development",
+      date: "2025-11-14",
+      category: "Web Dev",
+      excerpt: "Learn the fundamentals of HTML, CSS, and JavaScript to begin your journey as a web developer. A comprehensive guide for beginners."
+    },
+    {
+      title: "JavaScript Tips for Beginners",
+      date: "2025-11-10",
+      category: "JavaScript",
+      excerpt: "Essential JavaScript concepts and best practices that every developer should know to write clean, efficient code."
+    },
+    {
+      title: "Balancing Studies and Coding",
+      date: "2025-11-05",
+      category: "Learning",
+      excerpt: "Manage competitive exam preparation while pursuing your passion for web development. Practical strategies for success."
+    },
+    {
+      title: "CSS Grid vs Flexbox",
+      date: "2025-10-30",
+      category: "CSS",
+      excerpt: "Understanding the differences between CSS Grid and Flexbox. When and how to use each for optimal layouts."
+    },
+    {
+      title: "Building a Strong Portfolio",
+      date: "2025-10-25",
+      category: "Career",
+      excerpt: "Create a portfolio that impresses employers. Showcase your skills with projects that stand out."
+    },
+    {
+      title: "The Spirit of Soldiers",
+      date: "2025-10-20",
+      category: "Military",
+      excerpt: "Exploring the qualities that make military personnel exceptional: discipline, courage, and unwavering commitment."
+    },
+    {
+      title: "War Stories That Inspire",
+      date: "2025-10-15",
+      category: "History",
+      excerpt: "Historical accounts of military valor, strategy, and the human stories behind great conflicts."
+    }
+  ]
+};
+
+// Session state
+let loggedIn = false;
+let visitCount = PORTFOLIO.visitCounter;
+
+// Password Logic
+const passwordInput = document.getElementById('passwordInput');
+const loginBtn = document.getElementById('loginBtn');
+const logoutBtn = document.getElementById('logoutBtn');
+const errorMsg = document.getElementById('errorMessage');
+
+function login() {
+  const password = passwordInput.value;
+  if (password === PORTFOLIO.password) {
+    loggedIn = true;
+    document.getElementById('passwordModal').style.display = 'none';
+    document.getElementById('mainHeader').style.display = 'flex';
+    document.getElementById('mainContent').style.display = 'block';
+    errorMsg.style.display = 'none';
+    passwordInput.value = '';
+    visitCount++;
+    updateVisitCounter();
+    renderContent();
+  } else {
+    errorMsg.style.display = 'block';
+    passwordInput.value = '';
+  }
+}
+
+loginBtn.onclick = login;
+passwordInput.onkeypress = (e) => {
+  if (e.key === 'Enter') login();
+};
+
+logoutBtn.onclick = () => {
+  loggedIn = false;
+  document.getElementById('passwordModal').style.display = 'flex';
+  document.getElementById('mainHeader').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'none';
+};
+
+// Visit Counter
+function updateVisitCounter() {
+  document.getElementById('visitCounter').textContent = 'Visitors: ' + visitCount;
+}
+
+// Typing Animation
+const phrases = ['Web Developer', 'Student', 'Coder', 'Army Admirer'];
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function typeWriter() {
+  const current = phrases[phraseIndex];
+  const typewriterEl = document.getElementById('typewriter');
+  
+  if (isDeleting) {
+    typewriterEl.textContent = current.substring(0, charIndex - 1);
+    charIndex--;
+  } else {
+    typewriterEl.textContent = current.substring(0, charIndex + 1);
+    charIndex++;
+  }
+  
+  if (!isDeleting && charIndex === current.length) {
+    setTimeout(() => { isDeleting = true; typeWriter(); }, 2000);
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    setTimeout(typeWriter, 500);
+  } else {
+    setTimeout(typeWriter, isDeleting ? 50 : 100);
+  }
+}
+
+if (document.getElementById('typewriter')) {
+  setTimeout(typeWriter, 1000);
+}
+
+// Render Army Articles
+function renderArmyArticles() {
+  const container = document.getElementById('armyArticles');
+  container.innerHTML = '';
+  
+  PORTFOLIO.armyArticles.forEach(article => {
+    const card = document.createElement('div');
+    card.className = 'article-card';
+    card.innerHTML = `
+      <h3>${article.title}</h3>
+      <div class="article-meta">${article.date} | <span>${article.category}</span></div>
+      <p>${article.excerpt}</p>
+      <button class="btn" onclick="showArticleModal('${article.title.replace(/'/g, "\\'")}')">Read More</button>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// Render Blog Cards
+function renderBlogCards() {
+  const container = document.getElementById('blogCards');
+  container.innerHTML = '';
+  
+  PORTFOLIO.blogs.forEach(blog => {
+    const card = document.createElement('div');
+    card.className = 'blog-card';
+    card.innerHTML = `
+      <h3>${blog.title}</h3>
+      <div class="blog-meta">${blog.date} | <span>${blog.category}</span></div>
+      <p>${blog.excerpt}</p>
+      <button class="btn" onclick="showBlogModal('${blog.title.replace(/'/g, "\\'")}')">Read More</button>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// Modal Functions
+function showArticleModal(title) {
+  const article = PORTFOLIO.armyArticles.find(a => a.title === title);
+  if (!article) return;
+  
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 600px;">
+      <h2>${article.title}</h2>
+      <div style="font-size: 1.4rem; color: #888; margin-bottom: 2rem;">${article.date} | <span style="color: #b74b4b;">${article.category}</span></div>
+      <p style="font-size: 1.6rem; line-height: 1.8; margin-bottom: 2rem;">${article.content}</p>
+      <button class="btn" onclick="this.closest('.modal').remove()">Close</button>
+    </div>
+  `;
+  modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+  document.body.appendChild(modal);
+}
+
+function showBlogModal(title) {
+  const blog = PORTFOLIO.blogs.find(b => b.title === title);
+  if (!blog) return;
+  
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 600px;">
+      <h2>${blog.title}</h2>
+      <div style="font-size: 1.4rem; color: #888; margin-bottom: 2rem;">${blog.date} | <span style="color: #b74b4b;">${blog.category}</span></div>
+      <p style="font-size: 1.6rem; line-height: 1.8; margin-bottom: 2rem;">${blog.excerpt}</p>
+      <button class="btn" onclick="this.closest('.modal').remove()">Close</button>
+    </div>
+  `;
+  modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+  document.body.appendChild(modal);
+}
+
+// Smooth Scroll for Navigation
+document.querySelectorAll('nav a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = this.getAttribute('href').substring(1);
+    const section = document.getElementById(target);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      this.classList.add('active');
+    }
+  });
+});
+
+// Render all content
+function renderContent() {
+  renderArmyArticles();
+  renderBlogCards();
+}
+
+</script>
 </body>
 </html>
