@@ -1,61 +1,326 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ANKIT RAJPUT - Demo Site</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ANKIT RAJPUT — Portfolio</title>
+  <meta name="description" content="ANKIT RAJPUT — NDA aspirant, demo portfolio" />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      color: #222;
+    :root{
+      --accent:#00ffb3;
+      --muted:rgba(255,255,255,0.12);
+      --glass:rgba(255,255,255,0.03);
+      --radius:14px;
+      --maxw:1100px;
     }
-    header {
-      background: #111;
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
+    /* Reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;}
+
+    /* Pure black background */
+    body{
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      background:#000;
+      color:#eaeaea;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:60px;
     }
-    h1 {
-      margin: 0;
-      font-size: 42px;
-      letter-spacing: 2px;
-    }
-    section {
-      max-width: 700px;
-      margin: 40px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      font-size: 26px;
-      margin-bottom: 10px;
-      border-left: 5px solid #111;
-      padding-left: 10px;
-    }
-    a {
-      color: #0077ff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    a:hover {
-      text-decoration: underline;
+
+    .wrap{max-width:var(--maxw);margin:36px auto;padding:24px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .avatar{width:72px;height:72px;border-radius:14px;overflow:hidden;flex:0 0 72px;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+    .avatar svg{width:100%;height:100%;display:block}
+    h1{font-size:20px;letter-spacing:1px}
+    .tag{font-size:12px;color:var(--muted)}
+
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{color:#bfbfbf;text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    nav a.active, nav a:hover{background:var(--glass);color:var(--accent)}
+
+    main{margin-top:28px}
+
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:center}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:20px;box-shadow:0 6px 30px rgba(0,0,0,0.6)}
+
+    .intro h2{font-size:28px;margin-bottom:10px;color:#fff}
+    .intro p{color:#cfcfcf}
+    .cta{margin-top:18px;display:flex;gap:10px}
+    .btn{padding:10px 14px;border-radius:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;border:none;cursor:pointer}
+    .btn-primary{background:var(--accent);color:#000}
+    .btn-ghost{background:transparent;border:1px solid var(--muted);color:#fff}
+
+    .profile-stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .stat{background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:10px;font-size:13px}
+
+    /* Slideshow */
+    .slideshow{position:relative;overflow:hidden;border-radius:12px;height:260px}
+    .slides{display:flex;height:100%;transition:transform .8s cubic-bezier(.2,.9,.2,1)}
+    .slide{min-width:100%;display:grid;place-items:center;background:linear-gradient(135deg,#050505 0%, #111 100%);color:#fff;padding:18px}
+    .dots{display:flex;gap:8px;justify-content:center;margin-top:10px}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--muted);cursor:pointer}
+    .dot.active{background:var(--accent)}
+
+    /* Portfolio grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
+    .work{padding:14px;border-radius:12px;background:rgba(255,255,255,0.02);transition:transform .25s ease, box-shadow .25s ease}
+    .work:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
+    .work h3{margin-bottom:8px}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{font-size:12px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.03)}
+
+    footer{margin-top:28px;text-align:center;color:#8f8f8f;font-size:13px}
+
+    /* Page navigation (single-file SPA) */
+    section.page{margin-top:28px}
+    .hide{display:none}
+
+    /* Animations */
+    .fade-up{opacity:0;transform:translateY(12px);animation:fadeUp .7s forwards}
+    .delay-1{animation-delay:.08s}
+    .delay-2{animation-delay:.16s}
+    .delay-3{animation-delay:.24s}
+    @keyframes fadeUp{to{opacity:1;transform:none}}
+
+    /* Dark-mode toggle (we keep black as default) */
+    .controls{display:flex;gap:10px;align-items:center}
+
+    /* Responsive */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr}
+      .avatar{width:64px;height:64px}
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>ANKIT RAJPUT</h1>
-  </header>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="avatar" title="Replace with your photo">
+          <!-- simple SVG avatar - replace with an image if you like -->
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" fill="#070707"/>
+            <circle cx="100" cy="80" r="36" fill="#0ef6b4" opacity=".12"/>
+            <g fill="#fff" opacity="0.95">
+              <circle cx="100" cy="78" r="30"/>
+              <rect x="50" y="120" width="100" height="52" rx="10"/>
+            </g>
+          </svg>
+        </div>
+        <div>
+          <h1>★ 𝙉𝙖𝙢𝙚 : <strong>𝓐𝓷𝓴𝓲𝓽 𝓡𝓪𝓳𝓹𝓾𝓽</strong></h1>
+          <div class="tag">19 · Chhapra · NDA Aspirant · @ANKlTSlNGH</div>
+        </div>
+      </div>
 
-  <section>
-    <h2>ABOUT</h2>
-    <p>This is a demo personal website created for preview purposes.</p>
-    <p>Telegram: <a href="https://t.me/itzAnkitRajput" target="_blank">@itzAnkitRajput</a></p>
-  </section>
+      <nav>
+        <a href="#home" class="navlink active">Home</a>
+        <a href="#about" class="navlink">About</a>
+        <a href="#portfolio" class="navlink">Portfolio</a>
+        <a href="#gallery" class="navlink">Gallery</a>
+        <a href="#contact" class="navlink">Contact</a>
+      </nav>
+    </header>
 
+    <main>
+      <section id="home" class="page">
+        <div class="hero">
+          <div class="card intro fade-up delay-1">
+            <h2>Hello — I'm <span style="color:var(--accent)">𝓐𝓷𝓴𝓲𝓽 𝓡𝓪𝓳𝓹𝓾𝓽</span></h2>
+            <p>19 years old • From Chhapra. NDA aspirant preparing for SSB. I build small web demos, showcase projects, and train body + mind for officer qualities.</p>
+
+            <div class="profile-stats">
+              <div class="stat">Fav Player: Vaibhav / Suryavanshi</div>
+              <div class="stat">Fav No.: 07</div>
+              <div class="stat">Addicted to: 🏏 Cricket</div>
+            </div>
+
+            <div class="cta">
+              <button class="btn btn-primary" onclick="openTab('#portfolio')">View Portfolio</button>
+              <button class="btn btn-ghost" onclick="openTab('#contact')">Contact</button>
+            </div>
+            <p style="margin-top:14px;color:var(--muted);font-size:13px">Quote: <em>“असुरोऽहम् नास्तिकोऽहम् — न मस्तक झुकता, न नियम रचता।”</em></p>
+          </div>
+
+          <aside class="card fade-up delay-2">
+            <div style="font-weight:700;margin-bottom:8px">Slideshow</div>
+            <div class="slideshow" id="slideshow">
+              <div class="slides" id="slides">
+                <div class="slide">
+                  <div style="max-width:320px;text-align:center">
+                    <h3>Officer-like Qualities</h3>
+                    <p style="color:#cfcfcf">Discipline • Leadership • Courage • Integrity</p>
+                  </div>
+                </div>
+                <div class="slide">
+                  <div style="max-width:320px;text-align:center">
+                    <h3>Web Demos & Projects</h3>
+                    <p style="color:#cfcfcf">Small HTML tools, notes, practice pages.</p>
+                  </div>
+                </div>
+                <div class="slide">
+                  <div style="max-width:320px;text-align:center">
+                    <h3>Fitness & Routine</h3>
+                    <p style="color:#cfcfcf">Daily PT, running, push-ups, learning.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dots" id="dots"></div>
+
+            <div style="margin-top:12px;display:flex;gap:8px;justify-content:center">
+              <a class="btn" style="padding:8px 10px;background:transparent;border:1px solid var(--muted);color:#fff;text-decoration:none" href="https://t.me/ANKlTSlNGH" target="_blank">Telegram</a>
+              <a class="btn" style="padding:8px 10px;background:transparent;border:1px solid var(--muted);color:#fff;text-decoration:none" href="https://instagram.com/ANKlTSlNGH" target="_blank">Instagram</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="about" class="page fade-up delay-3">
+        <div class="card">
+          <h2>About</h2>
+          <p style="color:#cfcfcf;margin-top:10px">I am preparing for NDA and SSB. I focus on maths, english, physical fitness, leadership and officer-like qualities. I build small web projects and like to share study notes and practice tools.</p>
+
+          <div style="margin-top:14px">
+            <strong>Personal Info</strong>
+            <div style="margin-top:8px;color:#cfcfcf">Age: 19 · City: Chhapra · Caste: BABUAAAN · Username: @ANKlTSlNGH</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" class="page">
+        <div class="card">
+          <h2>Portfolio</h2>
+          <p style="color:#cfcfcf;margin-top:8px">Small projects and demos — click to view source or open live (demo links are placeholders).</p>
+
+          <div class="grid">
+            <div class="work">
+              <h3>Demo: Future Detector</h3>
+              <p style="color:#cfcfcf">A simple single-file HTML demo.</p>
+              <div class="tags" style="margin-top:10px">
+                <span class="chip">HTML</span>
+                <span class="chip">Demo</span>
+                <span class="chip">Static</span>
+              </div>
+              <div style="margin-top:12px">
+                <a class="btn" href="#" onclick="alert('Open GitHub to view source')">View Source</a>
+              </div>
+            </div>
+
+            <div class="work">
+              <h3>Fitness Routine</h3>
+              <p style="color:#cfcfcf">Daily PT plan and notes.</p>
+              <div class="tags" style="margin-top:10px">
+                <span class="chip">PDF</span>
+                <span class="chip">Notes</span>
+              </div>
+              <div style="margin-top:12px">
+                <a class="btn" href="#" onclick="alert('Replace with PDF link')">Open</a>
+              </div>
+            </div>
+
+            <div class="work">
+              <h3>SSB Prep Notes</h3>
+              <p style="color:#cfcfcf">Ideas to practice for SSB interviews and tests.</p>
+              <div class="tags" style="margin-top:10px">
+                <span class="chip">Notes</span>
+                <span class="chip">Leadership</span>
+              </div>
+            </div>
+
+            <div class="work">
+              <h3>Mini Tools</h3>
+              <p style="color:#cfcfcf">Calculators, small utilities.</p>
+              <div class="tags" style="margin-top:10px">
+                <span class="chip">Tools</span>
+                <span class="chip">HTML</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery" class="page">
+        <div class="card">
+          <h2>Gallery</h2>
+          <p style="color:#cfcfcf;margin-top:8px">A small slideshow and images (replace with your own photos).</p>
+          <div style="margin-top:12px;">
+            <div class="slideshow" id="gallerySlides" style="height:200px">
+              <div class="slides" id="gSlides">
+                <div class="slide"><h3>Photo 1</h3></div>
+                <div class="slide"><h3>Photo 2</h3></div>
+                <div class="slide"><h3>Photo 3</h3></div>
+              </div>
+            </div>
+            <div class="dots" id="gDots"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="page">
+        <div class="card">
+          <h2>Contact</h2>
+          <p style="color:#cfcfcf;margin-top:8px">Telegram: <a href="https://t.me/ANKlTSlNGH" target="_blank" style="color:var(--accent)">@ANKlTSlNGH</a></p>
+          <p style="color:#cfcfcf">Instagram: <a href="https://instagram.com/ANKlTSlNGH" target="_blank" style="color:var(--accent)">@ANKlTSlNGH</a></p>
+          <p style="color:var(--muted);font-size:13px;margin-top:10px">Tip: Replace the avatar svg with your photo. To add files (PDFs or images) upload them to your GitHub repo and link here.</p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div>Made with ❤ — ANKIT RAJPUT · Demo portfolio</div>
+      <div style="margin-top:6px;color:var(--muted)">Pro tip: edit this file on GitHub and Vercel will auto-deploy the changes.</div>
+    </footer>
+  </div>
+
+  <script>
+    // Simple SPA navigation
+    function openTab(hash){
+      location.hash = hash;
+      showPage(hash || '#home');
+    }
+    function showPage(hash){
+      document.querySelectorAll('.navlink').forEach(a=>a.classList.remove('active'));
+      document.querySelectorAll('section.page').forEach(s=>s.classList.add('hide'));
+      const link = document.querySelector('a[href="'+hash+'"]');
+      if(link) link.classList.add('active');
+      const sec = document.querySelector(hash);
+      if(sec) sec.classList.remove('hide');
+    }
+    window.addEventListener('hashchange',()=>showPage(location.hash||'#home'));
+    // initial
+    if(!location.hash) location.hash='#home';
+    showPage(location.hash);
+
+    // slideshow helper
+    function createSlideshow(slidesId, dotsId, interval=3500){
+      const slidesEl = document.getElementById(slidesId);
+      const dotsEl = document.getElementById(dotsId);
+      if(!slidesEl) return;
+      const slides = slidesEl.children;
+      let idx=0;
+      function render(){
+        slidesEl.style.transform = 'translateX(' + (-idx*100) + '%)';
+        if(dotsEl){
+          dotsEl.innerHTML = '';
+          for(let i=0;i<slides.length;i++){
+            const d = document.createElement('div');d.className='dot'+(i===idx?' active':'');d.addEventListener('click',()=>{idx=i;render();});dotsEl.appendChild(d);
+          }
+        }
+      }
+      render();
+      setInterval(()=>{ idx = (idx+1)%slides.length; render(); }, interval);
+    }
+    createSlideshow('slides','dots',3800);
+    createSlideshow('gSlides','gDots',4200);
+
+    // reveal animations
+    document.querySelectorAll('.fade-up').forEach((el, i)=>{ setTimeout(()=>el.style.opacity=1, 120*i); el.style.animationPlayState='running'});
+  </script>
 </body>
 </html>
